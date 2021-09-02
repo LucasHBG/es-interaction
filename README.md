@@ -8,8 +8,7 @@
 
 - Criei um container ligado à rede e ao volume criados:
 
-```docker run --name es-interaction --network es-interaction-mysql -e MYSQL_ROOT_PASSWORD=senha-secreta -v es-interaction-volume:/var/
-lib/mysql -d mysql:8```
+```docker run --name es-interaction --network es-interaction-mysql -e MYSQL_ROOT_PASSWORD=senha-secreta -v es-interaction-volume:/var/lib/mysql -d mysql:8```
 
 - Teste da conexão com banco de dados pelo container:
 
