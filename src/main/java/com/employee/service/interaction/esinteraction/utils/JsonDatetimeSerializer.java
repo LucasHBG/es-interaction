@@ -16,7 +16,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
  */
 public class JsonDatetimeSerializer extends JsonSerializer<Date> {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy 'at' HH:mm:ss", new Locale("pt", "BR"));
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("'Criado em' dd/MM/yyyy 'às' HH:mm:ss", new Locale("pt", "BR"));
 
     @Override
     public void serialize(Date date, JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
