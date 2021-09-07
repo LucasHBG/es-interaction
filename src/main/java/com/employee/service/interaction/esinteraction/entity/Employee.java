@@ -5,20 +5,33 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.data.annotation.Id;
+import com.employee.service.interaction.esinteraction.utils.JsonDateSerializer;
+import com.employee.service.interaction.esinteraction.utils.JsonDatetimeSerializer;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+/**
+ * @author LucasHBG
+ */
 @Entity
 @Table(name = "employee")
 public class Employee {
 
+    /**
+     * Anotação do spring para variáveis que se auto incrementam pela entidade de persistencia.
+     * Deixar o Hibernate incrementar resulta numa melhor performance
+     */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)     //Anotação do spring para variáveis que se auto incrementam no banco de dados
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long    employeeNum;
     
     private String  firstName;
+
     private Date    birthDate;
+
     private Date    createdDatetime;
 
     public Employee() {
@@ -26,12 +39,13 @@ public class Employee {
     }
 
     public Employee(Long employeeNum, String firstName, Date birthDate, Date createdDatetime) {
-        this.employeeNum = employeeNum;
-        this.firstName = firstName;
-        this.birthDate = birthDate;
-        this.createdDatetime = createdDatetime;
+        this.employeeNum        = employeeNum;
+        this.firstName          = firstName;
+        this.birthDate          = birthDate;
+        this.createdDatetime    = createdDatetime;
     }
 
+    @JsonIgnore
     public Long getEmployeeNum() {
         return employeeNum;
     }
@@ -48,6 +62,7 @@ public class Employee {
         this.firstName = firstName;
     }
 
+    @JsonSerialize(using = JsonDateSerializer.class)
     public Date getBirthDate() {
         return birthDate;
     }
@@ -56,6 +71,7 @@ public class Employee {
         this.birthDate = birthDate;
     }
 
+    @JsonSerialize(using = JsonDatetimeSerializer.class)
     public Date getCreatedDatetime() {
         return createdDatetime;
     }
@@ -112,5 +128,7 @@ public class Employee {
         return "Employee [birthDate=" + birthDate + ", createdDatetime=" + createdDatetime + ", employeeNum="
                 + employeeNum + ", firstName=" + firstName + "]";
     }
+
+    
 
 }
