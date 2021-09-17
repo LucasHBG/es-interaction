@@ -2,10 +2,11 @@ package com.employee.service.interaction.esinteraction.repository;
 
 import com.employee.service.interaction.esinteraction.entity.Employee;
 
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface EmployeeRepository extends CrudRepository<Employee, Long>{
+/**
+ *  Escolhi JPA no lugar do CRUD devido o Jpa retornar List<> no lugar de Iterable<S>
+ */
+public interface EmployeeRepository extends JpaRepository<Employee, Long>{
     
 }
