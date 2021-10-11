@@ -33,13 +33,19 @@ public class Employee implements Serializable {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "employee_num")
-    private Long    employeeNum;
+    private Long    id;
     
+    @Column(nullable = false)
     private String  firstName;
+
+    @Column(nullable = false)
+    private String  lastName;
 
     @Column(nullable = true)
     private Date    birthDate;
+
+    @Column(nullable = false)
+    private String email;
 
     /**
      * Essa coluna é ignorada ao tentar fazer update ou inserts, pois é um valor que não precisa mudar
@@ -55,29 +61,38 @@ public class Employee implements Serializable {
      */ 
     protected Employee() {}
 
-    public Employee(Long employeeNum, String firstName, Date birthDate, Date createdDatetime) {
-        this.employeeNum        = employeeNum;
-        this.firstName          = firstName;
-        this.birthDate          = birthDate;
-        this.createdDatetime    = createdDatetime;
+    public Employee(Long id, String firstName, String lastName, Date birthDate, String email, Date createdDatetime) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthDate = birthDate;
+        this.email = email;
+        this.createdDatetime = createdDatetime;
     }
 
     @JsonIgnore
-    public Long getEmployeeNum() {
-        return employeeNum;
+    public Long getId() {
+        return id;
     }
 
-    public void setEmployeeNum(Long employeeNum) {
-        this.employeeNum = employeeNum;
+    public void setEmployeeNum(Long id) {
+        this.id = id;
     }
 
-    @Column(nullable = false)
-    public String getFirstName() {
+    public String getFirstName(){
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(String firstName){
         this.firstName = firstName;
+    }
+
+    public String getLastName(){
+        return lastName;
+    }
+
+    public void setLastName(String lastName){
+        this.lastName = lastName;
     }
 
     @JsonSerialize(using = JsonDateSerializer.class)
@@ -89,6 +104,14 @@ public class Employee implements Serializable {
         this.birthDate = birthDate;
     }
 
+    public String getEmail(){
+        return email;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+
     @JsonSerialize(using = JsonDatetimeSerializer.class)
     public Date getCreatedDatetime() {
         return createdDatetime;
@@ -97,56 +120,5 @@ public class Employee implements Serializable {
     public void setCreatedDatetime(Date createdDatetime) {
         this.createdDatetime = createdDatetime;
     }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
-        result = prime * result + ((createdDatetime == null) ? 0 : createdDatetime.hashCode());
-        result = prime * result + ((employeeNum == null) ? 0 : employeeNum.hashCode());
-        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
-        return result;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Employee other = (Employee) obj;
-        if (birthDate == null) {
-            if (other.birthDate != null)
-                return false;
-        } else if (!birthDate.equals(other.birthDate))
-            return false;
-        if (createdDatetime == null) {
-            if (other.createdDatetime != null)
-                return false;
-        } else if (!createdDatetime.equals(other.createdDatetime))
-            return false;
-        if (employeeNum == null) {
-            if (other.employeeNum != null)
-                return false;
-        } else if (!employeeNum.equals(other.employeeNum))
-            return false;
-        if (firstName == null) {
-            if (other.firstName != null)
-                return false;
-        } else if (!firstName.equals(other.firstName))
-            return false;
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee [birthDate=" + birthDate + ", createdDatetime=" + createdDatetime + ", employeeNum="
-                + employeeNum + ", firstName=" + firstName + "]";
-    }
-
-    
 
 }
