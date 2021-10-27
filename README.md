@@ -33,4 +33,10 @@ spring.sql.init.platform=mysql
 spring.sql.init.mode=always
 ```
 
+Caso queira criar um usuário e dar a ele acesso ao seu banco de dados recém criado, faça o seguinte:
 
+```
+    mysql> create database es_interaction_database; -- Cria um novo banco de dados
+    mysql> create user 'nome-usuario'@'%' identified by 'senha-usuario'; -- Cria um novo usuário
+    mysql> grant all on es_interaction_database.* to 'nome-usuario'@'%'; -- Fornece todos os privilégios para o novo usuário no recém criado banco de dados
+```
