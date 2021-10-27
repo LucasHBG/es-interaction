@@ -18,21 +18,29 @@ public class EmployeeServiceImpl implements IEmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    /**
+     * Salva objeto do tipo Employee
+     */
     @Override
     public void saveEmployee(Employee employee) {
         //Salva objeto empregado
         employeeRepository.save(employee);
     }
 
+    /**
+     * Salva toda a lista de usuários recebida
+     */
     @Override
     public void saveAllEmployees(List<Employee> employees) {
         // Salva lista de empregados
         employeeRepository.saveAll(employees);
     }
 
+    /**
+     * Retorna todos os empregados do banco
+     */
     @Override
     public List<Employee> getAllEmployees() {
-        // Retorna todos os empregados do banco
         // adicionar paginação é mais eficiente nesse caso...
         return employeeRepository.findAll();
     }
