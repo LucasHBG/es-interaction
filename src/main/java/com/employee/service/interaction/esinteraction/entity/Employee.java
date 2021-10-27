@@ -18,10 +18,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
- * @author LucasHBG
- * A anotação @Entity avisa o Hibernate pra criar uma tabela dessa classe(usado em bancos embedded, como H2)
+ * A anotação '@Entity' avisa o Hibernate pra criar uma tabela dessa classe(usado em bancos embedded, como H2)
  * Serializable para transformar o objeto em um vetor de bytes para facilitar a comunicação, persistencia dos dados em
  * um banco de dados e a deserialização.
+ * 
+ * @author LucasHBG
+ * 
  */
 @Entity
 @Table(name = "employee")
